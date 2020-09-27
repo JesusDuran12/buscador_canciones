@@ -6,10 +6,10 @@ void main() {
   runApp(MyApp());
 }
 
-Future<Lyrics> fetchLetras(String artist,String title) async {
+Future<Lyrics> fetchLetras(Controller_Artist,Controller_Song) async {
   //Link del api: https://api.lyrics.ovh/v1/artist/title
-  String hola = 'https://api.lyrics.ovh/v1/'+artist+'/'+title;
-  final response = await http.get('https://api.lyrics.ovh/v1/'+artist+'/'+title);
+  var hola = 'https://api.lyrics.ovh/v1/'+Controller_Artist+'/'+Controller_Song;
+  final response = await http.get('https://api.lyrics.ovh/v1/'+Controller_Artist+'/'+Controller_Song);
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
@@ -77,8 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(appBar: AppBar(
       title: Text(widget.title),
     ),
-      body: Center(
-        child: Row(
+      body: ListView(
           children: <Widget>[
             TextField(
               controller: Controller_Artist,
@@ -107,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ,
           ],
         )
-      ),
+      ,
     );
   }
 }
