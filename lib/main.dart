@@ -18,7 +18,7 @@ Future<Lyrics> fetchLetras(Controller_Artist,Controller_Song) async {
   } else {
     // If the server did not return a 200 OK response,
     // then throw an exception.
-    throw Exception("$hola");
+    throw Exception('$hola');
   }
 }
 
@@ -68,8 +68,9 @@ class _MyHomePageState extends State<MyHomePage> {
     futureLetras = fetchLetras(Controller_Artist.text,Controller_Song.text);
   }
 
-  void _Buscar_Letra(){
+  void _Buscar_Letra(){ setState(() {
     futureLetras = fetchLetras(Controller_Artist.text,Controller_Song.text);
+  });
   }
 
   @override
@@ -93,7 +94,9 @@ class _MyHomePageState extends State<MyHomePage> {
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return Column(
-
+                    children: [
+                      Text(snapshot.data.lyrics)
+                    ],
                   );
                 } else if (snapshot.hasError) {
                   return Text("${snapshot.error}");
